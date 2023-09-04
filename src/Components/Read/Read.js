@@ -6,11 +6,17 @@ import { Link } from 'react-router-dom';
 const Read = () => {
     const [APIData, setAPIData] = useState([]);
     useEffect(() => {
-        axios.get(`https://64f5814f2b07270f705d4c29.mockapi.io/fakeData`)
-            .then((response) => {
-                setAPIData(response.data);
-            })
-    }, [])
+        const fetchData = async () => {
+          try {
+            const response = await axios.get('https://64f5814f2b07270f705d4c29.mockapi.io/fakeData');
+            setAPIData(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
     const setData = (data) => {
         // console.log(data);
         let { id, firstName, lastName, checkbox } = data;

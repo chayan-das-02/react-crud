@@ -10,15 +10,19 @@ const Create = () => {
 
     const navigate = useNavigate();
 
-    const postData = () => {
-        axios.post(`https://64f5814f2b07270f705d4c29.mockapi.io/fakeData`, {
-            firstName,
-            lastName,
-            checkbox
-        }).then(()=>{
+    const postData = async () => {
+        try {
+            await axios.post(`https://64f5814f2b07270f705d4c29.mockapi.io/fakeData`, {
+                firstName,
+                lastName,
+                checkbox,
+            });
             navigate('/read');
-        })
-    }
+        } catch (error) {
+            // Handle errors here
+            console.error('Error posting data:', error);
+        }
+    };
     return (
         <div>
             <h3>Create Page</h3>
